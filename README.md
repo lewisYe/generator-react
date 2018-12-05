@@ -21,7 +21,9 @@
 
 ### 5.模板版本
 
-     模拟具有pure和complete两个版本。pure 为简单版本只有基础的react；complete版本具有react+redux+readux-saga+antd
+     模拟具有pure和complete两个版本。
+     pure 为简单版本只有基础的react
+     complete 版本具有react+redux+readux-saga+antd
 
 ### 6.启动模板
 
