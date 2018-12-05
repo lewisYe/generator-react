@@ -4,9 +4,8 @@
 
 # 工具使用
 
-1.首先需要安装yeoman
-
-   ###### npm install -g yo
+### 1.首先需要安装yeoman
+     npm install -g yo
 
 2.安装模板生成器
 
