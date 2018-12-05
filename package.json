@@ -1,0 +1,24 @@
+{
+  "name": "lewisye-react",
+  "version": "1.0.0",
+  "description": "react-cli",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "app",
+    "router"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "author": "lewisYe",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "yeoman-generator": "^3.1.1",
+    "yosay": "^2.0.2"
+  },
+  "devDependencies": {}
+}
