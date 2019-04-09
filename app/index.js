@@ -54,12 +54,22 @@ module.exports = class extends Generator {
       );
       //修复.gitignore .babelrc 文件不被拷贝的bug
       this.fs.copy(
-        this.templatePath('_gitignore'),
-        this.destinationPath('.gitignore')
+        this.templatePath('complete/_gitignore'),
+        this.destinationPath(name+'/.gitignore'),
+        ()=>{
+          this.fs.unlink(name+'/_gitignore', (err) => {
+            if (err) throw err;
+          });
+        }
       );
       this.fs.copy(
-        this.templatePath('_babelrc'),
-        this.destinationPath('.babelrc')
+        this.templatePath('complete/_babelrc'),
+        this.destinationPath(name+'/.babelrc'),
+        ()=>{
+          this.fs.unlink(name+'/_babelrc', (err) => {
+            if (err) throw err;
+          });
+        }
       );
     }
   }

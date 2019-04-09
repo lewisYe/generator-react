@@ -2,7 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
-var OpenBrowserPlugin = require('open-browser-webpack-plugin')
+const HappyPack = require('happypack');
+const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 
 const APP_FILE = path.resolve(__dirname, '../src/index.js') 
 
@@ -21,14 +22,39 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader"
+        use: 'happypack/loader?id=js'
       },
       {
-        test: /\.(sa|sc|c)ss$/,
+        test: /\.css$/,
         use: [
           'style-loader',
           'css-loader',
-          'sass-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [require('autoprefixer')()]
+            }
+          },
+        ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]',
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [require('autoprefixer')()]
+            }
+          },
+          'less-loader',
         ],
       },
       {
@@ -53,8 +79,22 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html'
     }),
+    new HappyPack({
+      id: 'js',
+      threads: 4,
+      loaders: [ 'babel-loader' ]
+    }),
     new CleanWebpackPlugin(['dist']),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
-  ]
+  ],
+  resolve: {
+    extensions: ['.js', '.jsx', '.less', '.css'], //后缀名自动补全
+    alias: {
+      
+    },
+    modules: [
+      'node_modules',
+    ]
+  },
 }
