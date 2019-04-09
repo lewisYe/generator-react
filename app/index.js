@@ -52,6 +52,15 @@ module.exports = class extends Generator {
         this.templatePath('complete'),
         this.destinationPath(name)
       );
+      //修复.gitignore .babelrc 文件不被拷贝的bug
+      this.fs.copy(
+        this.templatePath('_gitignore'),
+        this.destinationPath('.gitignore')
+      );
+      this.fs.copy(
+        this.templatePath('_babelrc'),
+        this.destinationPath('.babelrc')
+      );
     }
   }
   generateClient() {
